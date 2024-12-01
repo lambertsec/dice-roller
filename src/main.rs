@@ -27,19 +27,9 @@ fn main() {
         &outcomes.push(Dice::roll_dice(die));
     }
 
-    let mut outcome_string = String::new();
+    let mut outcome_string = Dice::calculate_outcomes(&outcomes);
 
-    for item in &outcomes {
 
-        if !outcomes.last().eq(&Some(&item)) {
-            outcome_string += &item.to_string();
-            outcome_string += ", ";
-        }else{
-            outcome_string += "and ";
-            outcome_string += &item.to_string();
-        }
-
-    }
 
     let total:i8 = Dice::total(outcomes);
 
@@ -73,6 +63,21 @@ pub mod dice_tools{
                 total += value;
             }
             total
+        }
+
+        pub fn calculate_outcomes(outcomes:&Vec<i8>)-> String{
+            let mut output = String::new();
+            for item in &outcomes {
+
+                if !outcomes.last().eq(&Some(&item)) {
+                    output += &item.to_string();
+                    output += ", ";
+                }else{
+                    output += "and ";
+                    output += &item.to_string();
+                }
+
+            }
         }
     }
 
